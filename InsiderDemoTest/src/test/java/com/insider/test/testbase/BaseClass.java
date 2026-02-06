@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
@@ -55,7 +56,7 @@ public class BaseClass {
 			break;
 		}
 		case "firefox": {
-			driver = new FirefoxDriver();
+			driver = new FirefoxDriver(getFirefoxOptions());
 			break;
 		}
 		default:
@@ -71,16 +72,26 @@ public class BaseClass {
 	}
 
     public ChromeOptions getChromeOptions() {
-        ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--disable-notification");
-        chromeOptions.addArguments("--disable-gpu");
-        chromeOptions.addArguments("--disable-popup-blocking");
-        chromeOptions.addArguments("--no-sandbox");
-        chromeOptions.addArguments("--ignore-certificate-errors");
-        chromeOptions.addArguments("--ignore-certificate-errors-spki-list");
-        chromeOptions.addArguments("--suppress-message-center-popups");
-        chromeOptions.setAcceptInsecureCerts(true);
-        return chromeOptions;
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--start-maximized");
+        options.addArguments("--incognito");
+        options.addArguments("--disable-notifications");
+        options.addArguments("--disable-popup-blocking");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--ignore-certificate-errors");
+        options.setAcceptInsecureCerts(true);
+        return options;
+    }
+
+    public FirefoxOptions getFirefoxOptions() {
+        FirefoxOptions options = new FirefoxOptions();
+        options.addArguments("-private");
+        options.addPreference("dom.webnotifications.enabled", false);
+        options.addPreference("geo.enabled", false);
+        options.addPreference("network.manage-offline-status", false);
+        options.setAcceptInsecureCerts(true);
+        return options;
     }
 
 	@AfterMethod(alwaysRun = true)
