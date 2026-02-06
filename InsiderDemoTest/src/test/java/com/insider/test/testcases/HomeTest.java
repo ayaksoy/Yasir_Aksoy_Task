@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 public class HomeTest extends CommonMethods {
     @Test
     public void verifyHomePageBlocks() {
-        driver.get(ConfigsReader.getProperty("url"));
+        driver.get(ConfigsReader.getProperty("homeurl"));
         Assert.assertTrue(driver.getTitle().contains("Insider"), "Page title wrong!");
 
 
