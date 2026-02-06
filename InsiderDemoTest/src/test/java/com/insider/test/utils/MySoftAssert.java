@@ -8,6 +8,6 @@ public class MySoftAssert extends SoftAssert {
     public void onAssertFailure(IAssert<?> assertCommand, AssertionError ex) {
         String methodName = assertCommand.getMessage();
 
-        CommonMethods.takeScreenshot("SoftAssert_Failure_" + methodName+".png");
+        CommonMethods.takeScreenshot("SoftAssert_Failure.png");
     }
 }

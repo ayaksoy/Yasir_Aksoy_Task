@@ -7,8 +7,11 @@ import org.openqa.selenium.support.PageFactory;
 
 public class QAJobsPage {
 
-    @FindBy(css = "div.header-top div.container")
+    @FindBy(linkText = "See all QA jobs")
     public WebElement allJobsButton;
+
+    @FindBy(id = "wt-cli-accept-all-btn")
+    public WebElement cookieAccept;
 
     public QAJobsPage() {
         PageFactory.initElements(BaseClass.driver, this);
