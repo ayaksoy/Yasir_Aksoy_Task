@@ -6,10 +6,10 @@ import com.insider.test.utils.MySoftAssert;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class HomeTest extends CommonMethods {
+public class HomeTests extends CommonMethods {
     @Test
     public void verifyHomePageBlocks() {
-        driver.get(ConfigsReader.getProperty("homeurl"));
+        driver.get(ConfigsReader.getProperty("homepage_url"));
         Assert.assertTrue(driver.getTitle().contains("Insider"), "Page title wrong!");
 
 
