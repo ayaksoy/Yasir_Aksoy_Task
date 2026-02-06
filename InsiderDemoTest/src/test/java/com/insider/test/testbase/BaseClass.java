@@ -4,6 +4,7 @@ import java.time.Duration;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
@@ -43,14 +44,14 @@ public class BaseClass {
 	}
 
 	@BeforeMethod(alwaysRun = true)
-	public static void setUp() {
+	public void setUp() {
 		ConfigsReader.readProperties(Constants.CONFIGURATION_FILEPATH);
 		String browser = ConfigsReader.getProperty("browser");
 
 		driver = null;
 		switch (browser.toLowerCase()) {
 		case "chrome": {
-			driver = new ChromeDriver();
+            driver = new ChromeDriver(getChromeOptions());
 			break;
 		}
 		case "firefox": {
@@ -69,8 +70,21 @@ public class BaseClass {
 		PageInitializer.initialize();
 	}
 
+    public ChromeOptions getChromeOptions() {
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--disable-notification");
+        chromeOptions.addArguments("--disable-gpu");
+        chromeOptions.addArguments("--disable-popup-blocking");
+        chromeOptions.addArguments("--no-sandbox");
+        chromeOptions.addArguments("--ignore-certificate-errors");
+        chromeOptions.addArguments("--ignore-certificate-errors-spki-list");
+        chromeOptions.addArguments("--suppress-message-center-popups");
+        chromeOptions.setAcceptInsecureCerts(true);
+        return chromeOptions;
+    }
+
 	@AfterMethod(alwaysRun = true)
-	public static void tearDown() {
+	public void tearDown() {
 		if (driver != null) {
 			driver.quit();
 		}

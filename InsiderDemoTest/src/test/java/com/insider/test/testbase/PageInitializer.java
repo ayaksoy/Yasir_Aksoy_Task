@@ -1,7 +1,10 @@
 package com.insider.test.testbase;
 
 
+import com.insider.test.pages.HomePage;
+
 public class PageInitializer extends BaseClass {
+    public static HomePage homePage;
 //
 //	public static LoginPageElements loginPage;
 //	public static DashboardPageElements dashboardPage;
@@ -15,6 +18,6 @@ public class PageInitializer extends BaseClass {
 //		personalDetails = new PersonalDetailsPageElements();
 //	}
 public static void initialize() {
-
-}
+    homePage = new HomePage();
+    }
 }

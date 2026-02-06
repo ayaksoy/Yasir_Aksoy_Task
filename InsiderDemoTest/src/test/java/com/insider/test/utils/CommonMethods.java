@@ -13,12 +13,15 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.google.common.io.Files;
 import com.insider.test.testbase.PageInitializer;
+
+import javax.swing.*;
 
 public class CommonMethods extends PageInitializer {
 
@@ -321,6 +324,11 @@ public class CommonMethods extends PageInitializer {
 	{
 		getJSObject().executeScript("arguments[0].scrollIntoView(true)", element);
 	}
+    public static void scrollToElementWithAction(WebElement element)
+    {
+        Actions actions = new Actions(driver);
+        actions.moveToElement(element).perform();
+    }
 	
 	
 	/**
