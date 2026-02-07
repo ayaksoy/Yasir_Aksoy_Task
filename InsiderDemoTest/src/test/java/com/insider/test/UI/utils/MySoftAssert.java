@@ -1,4 +1,4 @@
-package com.insider.test.utils;
+package com.insider.test.UI.utils;
 import org.testng.asserts.IAssert;
 import org.testng.asserts.SoftAssert;
 

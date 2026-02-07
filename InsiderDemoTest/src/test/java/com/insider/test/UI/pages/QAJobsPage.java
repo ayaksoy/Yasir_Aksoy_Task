@@ -1,6 +1,6 @@
-package com.insider.test.pages;
+package com.insider.test.UI.pages;
 
-import com.insider.test.testbase.BaseClass;
+import com.insider.test.UI.testbase.BaseClass;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;

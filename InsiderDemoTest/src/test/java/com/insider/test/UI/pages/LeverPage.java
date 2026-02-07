@@ -1,5 +1,5 @@
-package com.insider.test.pages;
-import com.insider.test.utils.CommonMethods;
+package com.insider.test.UI.pages;
+import com.insider.test.UI.utils.CommonMethods;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;

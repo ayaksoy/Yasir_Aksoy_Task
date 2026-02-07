@@ -1,10 +1,10 @@
-package com.insider.test.testbase;
+package com.insider.test.UI.testbase;
 
 
-import com.insider.test.pages.HomePage;
-import com.insider.test.pages.LeverPage;
-import com.insider.test.pages.OpenPositionsPage;
-import com.insider.test.pages.QAJobsPage;
+import com.insider.test.UI.pages.HomePage;
+import com.insider.test.UI.pages.LeverPage;
+import com.insider.test.UI.pages.OpenPositionsPage;
+import com.insider.test.UI.pages.QAJobsPage;
 
 public class PageInitializer extends BaseClass {
     public static HomePage homePage;

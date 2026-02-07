@@ -1,4 +1,4 @@
-package com.insider.test.utils;
+package com.insider.test.UI.utils;
 
 import java.io.FileInputStream;
 import java.io.IOException;

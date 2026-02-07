@@ -1,10 +1,9 @@
-package com.insider.test.testbase;
+package com.insider.test.UI.testbase;
 
-import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
-import com.insider.test.utils.CommonMethods;
+import com.insider.test.UI.utils.CommonMethods;
 
 public class Listener implements ITestListener {
 

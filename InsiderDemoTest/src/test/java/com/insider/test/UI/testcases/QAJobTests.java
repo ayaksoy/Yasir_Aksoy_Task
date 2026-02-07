@@ -1,8 +1,8 @@
-package com.insider.test.testcases;
+package com.insider.test.UI.testcases;
 
-import com.insider.test.utils.CommonMethods;
-import com.insider.test.utils.ConfigsReader;
-import com.insider.test.utils.MySoftAssert;
+import com.insider.test.UI.utils.CommonMethods;
+import com.insider.test.UI.utils.ConfigsReader;
+import com.insider.test.UI.utils.MySoftAssert;
 import org.testng.annotations.Test;
 
 public class QAJobTests extends CommonMethods {

@@ -1,4 +1,4 @@
-package com.insider.test.utils;
+package com.insider.test.UI.utils;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -19,9 +19,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.google.common.io.Files;
-import com.insider.test.testbase.PageInitializer;
-
-import javax.swing.*;
+import com.insider.test.UI.testbase.PageInitializer;
 
 public class CommonMethods extends PageInitializer {
 

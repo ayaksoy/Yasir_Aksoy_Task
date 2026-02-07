@@ -6,13 +6,13 @@
 
     <test name="UI Integrity Tests">
         <classes>
-            <class name="com.insider.test.testcases.HomeTests"/>
+            <class name="com.insider.test.UI.testcases.HomeTests"/>
         </classes>
     </test>
 
     <test name="Recruitment Flow Tests">
         <classes>
-            <class name="com.insider.test.testcases.QAJobTests"/>
+            <class name="com.insider.test.UI.testcases.QAJobTests"/>
         </classes>
     </test>
 

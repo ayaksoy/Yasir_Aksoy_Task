@@ -1,4 +1,4 @@
-package com.insider.test.testbase;
+package com.insider.test.UI.testbase;
 
 import java.time.Duration;
 
@@ -16,8 +16,8 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
-import com.insider.test.utils.ConfigsReader;
-import com.insider.test.utils.Constants;
+import com.insider.test.UI.utils.ConfigsReader;
+import com.insider.test.UI.utils.Constants;
 
 public class BaseClass {
 

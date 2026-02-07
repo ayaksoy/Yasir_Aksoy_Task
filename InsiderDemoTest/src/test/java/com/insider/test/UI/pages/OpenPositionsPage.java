@@ -1,17 +1,12 @@
-package com.insider.test.pages;
+package com.insider.test.UI.pages;
 
-import com.insider.test.testbase.BaseClass;
-import com.insider.test.utils.CommonMethods;
-import com.insider.test.utils.MySoftAssert;
+import com.insider.test.UI.utils.CommonMethods;
+import com.insider.test.UI.utils.MySoftAssert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
 import java.util.List;
 
 public class OpenPositionsPage extends CommonMethods {
