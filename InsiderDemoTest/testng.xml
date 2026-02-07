@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Insider Test Automation Suite">
+
+    <parameter name="browser" value="chrome"/>
+
+    <test name="UI Integrity Tests">
+        <classes>
+            <class name="com.insider.test.testcases.HomeTests"/>
+        </classes>
+    </test>
+
+    <test name="Recruitment Flow Tests">
+        <classes>
+            <class name="com.insider.test.testcases.QAJobTests"/>
+        </classes>
+    </test>
+
+</suite>
