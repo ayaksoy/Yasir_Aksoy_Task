@@ -16,7 +16,7 @@ public class ApiListener implements ITestListener {
 
     @Override
     public void onStart(ITestContext context) {
-        ExtentSparkReporter spark = new ExtentSparkReporter("target/API-Report.html");
+        ExtentSparkReporter spark = new ExtentSparkReporter("target/html-reports/API-Report.html");
         spark.config().setTheme(Theme.DARK);
         spark.config().setDocumentTitle("API Test Report");
         spark.config().setReportName("Insider API Automation Results");
