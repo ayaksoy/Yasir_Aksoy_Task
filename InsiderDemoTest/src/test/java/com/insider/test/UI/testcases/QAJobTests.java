@@ -24,7 +24,9 @@ public class QAJobTests extends CommonMethods {
         //waits until all the jobs locations are Istanbul, Turkiye
         openPositionsPage.checkLocationPresence("Istanbul, Turkiye");
 
-        openPositionsPage.verifyJobDetails("Quality",
+        //it fails cuz one of the jobs title isnt Quality Assurance it is Quality Engineering
+        // you can change expectedTitle to Quality to pass the test
+        openPositionsPage.verifyJobDetails("Quality Assurance",
                 "Quality Assurance", "Istanbul, Turkiye", softAssert);
         softAssert.assertAll();
         openPositionsPage.clickOnViewRoleOfFirstJob();
