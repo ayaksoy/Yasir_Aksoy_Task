@@ -37,6 +37,7 @@ public class BaseClass {
 	@AfterSuite(alwaysRun = true)
 	public void writeReport() {
 		report.flush();
+
 	}
 
     @Parameters("browser")
