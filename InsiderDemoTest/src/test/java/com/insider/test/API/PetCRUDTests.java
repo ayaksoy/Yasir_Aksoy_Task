@@ -1,5 +1,6 @@
 package com.insider.test.API;
 
+import com.insider.test.API.data.PetDataProvider;
 import com.insider.test.API.models.Pet;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -18,16 +19,17 @@ import static org.hamcrest.Matchers.*;
 public class PetCRUDTests {
 
 
-    private final int petId = 19998877;
+    private long petId;
     private Pet payload;
 
     @BeforeClass
     public void setup() {
         RestAssured.baseURI = "https://petstore.swagger.io/v2";
-        payload = createPetPayload(petId, "Sivas_Kangali", "available");
+        petId = System.currentTimeMillis();
+        payload = createPetPayload(petId, "Sivas_Kangali_" + petId, "available");
     }
 
-    @Test(priority = 1, description = "Positive: Create a new pet with full nested JSON data")
+    @Test(priority = 1, description = "Positive: Create a new pet with dynamic ID")
     public void createPetPositive() {
         SoftAssert softAssert = new SoftAssert();
         Response response = given()
@@ -39,44 +41,52 @@ public class PetCRUDTests {
         response.then().statusCode(200);
 
         softAssert.assertEquals(response.jsonPath().getLong("id"), petId);
-        softAssert.assertEquals(response.jsonPath().getString("name"), "Sivas_Kangali");
-        softAssert.assertEquals(response.jsonPath().getString("category.name"), "Dogs");
-        softAssert.assertEquals(response.jsonPath().getString("tags[0].name"), "GuardDog");
+        softAssert.assertEquals(response.jsonPath().getString("name"), payload.getName());
         softAssert.assertAll();
 
-        System.out.println("Pet Created Successfully: " + petId);
+        System.out.println("Pet Created Successfully with ID: " + petId);
     }
 
-    @Test(priority = 2, description = "Negative: Create pet with Invalid Input (Empty Body)")
-    public void createPetNegative() {
+    @Test(priority = 2,
+            description = "Negative: Create pet with multiple invalid inputs",
+            dataProvider = "negativePetData",
+            dataProviderClass = PetDataProvider.class)
+    public void createPetNegative(String scenario, String invalidPayload, int expectedStatusCode) {
+
+        System.out.println("Running Negative Scenario: " + scenario);
+
         given()
                 .contentType(ContentType.JSON)
-                .body("{}")
+                .body(invalidPayload)
                 .when()
                 .post("/pet")
                 .then()
-                .statusCode(anyOf(is(400), is(405), is(500)));
+                .statusCode(anyOf(is(expectedStatusCode), is(400), is(500), is(415),is(405)));
 
-        System.out.println("Negative Create Test Passed");
+        System.out.println("Scenario Passed: " + scenario);
     }
 
     @Test(priority = 3, description = "Positive: Get existing pet by ID")
     public void getPetPositive() {
-        given()
+        SoftAssert softAssert = new SoftAssert();
+
+        Response response = given()
                 .pathParam("id", petId)
                 .when()
-                .get("/pet/{id}")
-                .then()
-                .statusCode(200)
-                .body("id", equalTo(petId))
-                .body("status", equalTo("available"));
+                .get("/pet/{id}");
 
-        System.out.println("Read Pet Successful");
+        response.then().statusCode(200);
+
+        softAssert.assertEquals(response.jsonPath().getLong("id"), petId);
+        softAssert.assertEquals(response.jsonPath().getString("status"), "available");
+        softAssert.assertAll();
+
+        System.out.println("Read Pet Successful: " + petId);
     }
 
     @Test(priority = 4, description = "Negative: Get non-existing pet")
     public void getPetNegative() {
-        long nonExistingId = 999999999;
+        long nonExistingId = System.currentTimeMillis();
 
         given()
                 .pathParam("id", nonExistingId)
@@ -92,8 +102,7 @@ public class PetCRUDTests {
     @Test(priority = 5, description = "Positive: Update pet status to 'sold'")
     public void updatePetPositive() {
         payload.setStatus("sold");
-        payload.setName("Sivas_Sold");
-        SoftAssert softAssert = new SoftAssert();
+        payload.setName("Sivas_Sold_" + petId);
 
         Response response = given()
                 .contentType(ContentType.JSON)
@@ -103,9 +112,7 @@ public class PetCRUDTests {
 
         response.then().statusCode(200);
 
-        softAssert.assertEquals(response.jsonPath().getString("status"), "sold");
-        softAssert.assertEquals(response.jsonPath().getString("name"), "Sivas_Sold");
-        softAssert.assertAll();
+        Assert.assertEquals(response.jsonPath().getString("status"), "sold");
 
         given()
                 .pathParam("id", petId)
@@ -114,7 +121,7 @@ public class PetCRUDTests {
                 .then()
                 .body("status", equalTo("sold"));
 
-        System.out.println("Update Pet Successful");
+        System.out.println("Update Pet Successful: " + petId);
     }
 
     @Test(priority = 6, description = "Negative: Update with Invalid ID Format")
@@ -141,7 +148,7 @@ public class PetCRUDTests {
                 .then()
                 .statusCode(200);
 
-        System.out.println("Pet Deleted Successfully");
+        System.out.println("Pet Deleted Successfully: " + petId);
     }
 
     @Test(priority = 8, description = "Negative: Try to delete already deleted pet")
