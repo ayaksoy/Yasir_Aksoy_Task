@@ -5,6 +5,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
@@ -16,6 +18,7 @@ public class OpenPositionsPage extends CommonMethods {
     private final By positionDepartment = By.className("position-department");
     private final By positionLocation = By.className("position-location");
     private final By viewRoleButton = By.linkText("View Role");
+    WebDriverWait wait = getWaitObject();
 
     @FindBy(id = "filter-by-location")
     public WebElement locationSelect;
@@ -30,9 +33,35 @@ public class OpenPositionsPage extends CommonMethods {
     public List<WebElement> allJobs;
 
     public void filterJobs(String location, String department) {
-        selectDropdown(locationSelect,location);
-        wait(5);
         selectDropdown(departmentSelect,department);
+        selectDropdown(locationSelect,location);
+    }
+
+    public void checkLocationPresence(String location) {
+        int i = 0;
+        while (i++ < 10) {
+            try {
+                boolean allMatch = true;
+
+                if (allJobs.isEmpty()) {
+                    allMatch = false;
+                } else {
+                    for (WebElement job : allJobs) {
+                        if (!job.getText().contains(location)) {
+                            allMatch = false;
+                            break;
+                        }
+                    }
+                }
+
+                if (allMatch) {
+                    return;
+                }
+                wait(1);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void verifyJobDetails(String expectedTitle, String expectedDept, String expectedLoc, SoftAssert softAssert) {
@@ -50,8 +79,9 @@ public class OpenPositionsPage extends CommonMethods {
         }
     }
 
+
     public void clickOnViewRoleOfFirstJob() {
-        Assert.assertTrue(allJobs.isEmpty(),"No jobs found");
+        Assert.assertFalse(allJobs.isEmpty(),"No jobs found");
         scrollToElement(allJobs.get(0));
         waitForClickability(allJobs.get(0).findElement(viewRoleButton));
 

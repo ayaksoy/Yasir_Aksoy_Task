@@ -2,9 +2,13 @@ package com.insider.test.UI.testcases;
 
 import com.insider.test.UI.utils.CommonMethods;
 import com.insider.test.UI.utils.ConfigsReader;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+
+import java.time.Duration;
 
 public class QAJobTests extends CommonMethods {
     @Test
@@ -17,15 +21,16 @@ public class QAJobTests extends CommonMethods {
 
         openPositionsPage.filterJobs("Istanbul, Turkiye", "Quality Assurance");
 
-        waitForVisibility(openPositionsPage.jobsList);
+        //waits until all the jobs locations are Istanbul, Turkiye
+        openPositionsPage.checkLocationPresence("Istanbul, Turkiye");
 
-        openPositionsPage.verifyJobDetails("Quality Assurance",
+        openPositionsPage.verifyJobDetails("Quality",
                 "Quality Assurance", "Istanbul, Turkiye", softAssert);
         softAssert.assertAll();
         openPositionsPage.clickOnViewRoleOfFirstJob();
         switchToChildWindow();
 
-
+        waitForVisibility(leverPage.applyButton);
         Assert.assertTrue(driver.getCurrentUrl().contains("lever.co"), "Redirect to Lever failed!");
         Assert.assertTrue(leverPage.isApplyButtonDisplayed(), "Lever application form is not loaded properly!");
 
