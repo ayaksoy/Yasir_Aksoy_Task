@@ -3,6 +3,9 @@
 <suite name="Insider Test Automation Suite">
 
     <parameter name="browser" value="chrome"/>
+    <listeners>
+        <listener class-name="com.insider.test.UI.testbase.Listener"/>
+    </listeners>
 
     <test name="UI Integrity Tests">
         <classes>

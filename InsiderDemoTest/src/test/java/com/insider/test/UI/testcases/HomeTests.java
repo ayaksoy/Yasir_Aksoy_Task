@@ -2,9 +2,9 @@ package com.insider.test.UI.testcases;
 
 import com.insider.test.UI.utils.CommonMethods;
 import com.insider.test.UI.utils.ConfigsReader;
-import com.insider.test.UI.utils.MySoftAssert;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 public class HomeTests extends CommonMethods {
     @Test
@@ -13,7 +13,7 @@ public class HomeTests extends CommonMethods {
         Assert.assertTrue(driver.getTitle().contains("Insider"), "Page title wrong!");
 
 
-        MySoftAssert softAssert = new MySoftAssert();
+        SoftAssert softAssert = new SoftAssert();
         scrollToElement(homePage.navigationBar);
         waitForVisibility(homePage.navigationBar);
         softAssert.assertTrue(homePage.navigationBar.isDisplayed(), "Navbar not loaded!");

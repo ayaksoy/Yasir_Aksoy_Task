@@ -362,7 +362,7 @@ public class CommonMethods extends PageInitializer {
 		File screenShot = ssDriver.getScreenshotAs(OutputType.FILE);
 
 		// getTimeStamp() is used to make the screen shot name unique
-		String screenShotFilepath = Constants.SCREENSHOT_FILEPATH + getTimeStamp() + fileName;
+		String screenShotFilepath = Constants.SCREENSHOT_FILEPATH + getTimeStamp() + fileName+".png";
 
 		try {
 			File screenShotDir = new File(Constants.SCREENSHOT_FILEPATH);
@@ -380,7 +380,7 @@ public class CommonMethods extends PageInitializer {
 			System.out.println("Screenshot can not be created!!!");
 		}
 
-		return screenShotFilepath;
+        return ((TakesScreenshot) driver).getScreenshotAs (OutputType.BASE64);
 
 	}
 

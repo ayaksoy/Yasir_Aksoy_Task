@@ -1,11 +1,12 @@
 package com.insider.test.UI.pages;
 
 import com.insider.test.UI.utils.CommonMethods;
-import com.insider.test.UI.utils.MySoftAssert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 
 import java.util.List;
 
@@ -34,7 +35,7 @@ public class OpenPositionsPage extends CommonMethods {
         selectDropdown(departmentSelect,department);
     }
 
-    public void verifyJobDetails(String expectedTitle, String expectedDept, String expectedLoc, MySoftAssert softAssert) {
+    public void verifyJobDetails(String expectedTitle, String expectedDept, String expectedLoc, SoftAssert softAssert) {
         for (WebElement job : allJobs) {
             String actualTitle = job.findElement(positionTitle).getText();
             String actualDept = job.findElement(positionDepartment).getText();
@@ -50,6 +51,7 @@ public class OpenPositionsPage extends CommonMethods {
     }
 
     public void clickOnViewRoleOfFirstJob() {
+        Assert.assertTrue(allJobs.isEmpty(),"No jobs found");
         scrollToElement(allJobs.get(0));
         waitForClickability(allJobs.get(0).findElement(viewRoleButton));
 
