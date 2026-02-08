@@ -10,7 +10,7 @@ The project is built using **Java**, **TestNG**, **RestAssured** (API), **Seleni
 
 1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/YOUR_USERNAME/InsiderDemoTest.git](https://github.com/YOUR_USERNAME/InsiderDemoTest.git)
+    git clone https://github.com/ayaksoy/Yasir_Aksoy_Task.git
     ```
 2.  **Install dependencies:**
     ```bash
